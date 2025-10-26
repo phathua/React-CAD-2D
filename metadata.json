@@ -1,0 +1,5 @@
+{
+  "name": "React CAD 2D",
+  "description": "A client-side 2D CAD web application built with React, TypeScript, and Paper.js. It features layers, hatching, AutoCAD-style shortcuts, and DXF import/export, all running entirely in the browser.",
+  "requestFramePermissions": []
+}
