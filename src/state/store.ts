@@ -52,8 +52,9 @@ interface AppState extends DocumentState, EditorState {
 // FIX: Add types for the store with temporal middleware to fix TypeScript errors.
 type UndoState = Pick<AppState, 'entities' | 'layers' | 'activeLayerId'>;
 
+// FIX: Corrected temporal property type from UseBoundStore to StoreApi to match zundo's return type.
 type StoreWithTemporal = UseBoundStore<StoreApi<AppState>> & {
-  temporal: UseBoundStore<StoreApi<TemporalState<UndoState>>>;
+  temporal: StoreApi<TemporalState<UndoState>>;
 };
 
 
@@ -139,6 +140,7 @@ const stateCreator: StateCreator<AppState> = (set, get) => ({
   setLastCommand: (command) => set({ lastCommand: command }),
 });
 
+// FIX: Add `partialize` option to temporal middleware to correctly type the undo state and only track document changes.
 export const useStore = create<AppState>()(
   temporal(stateCreator, {
     partialize: (state) => {
